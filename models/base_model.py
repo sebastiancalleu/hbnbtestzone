@@ -2,6 +2,7 @@
 
 import uuid
 from datetime import datetime
+import models
 
 class BaseModel():
 
@@ -15,17 +16,21 @@ class BaseModel():
                     setattr(self, key, d)
         else:
             self.id = str(uuid.uuid4())
-            d = datetime.now()
-            self.created_at = d.isoformat()
-            self.updated_at = d.isoformat()
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def save(self):
-        u = datetime.now()
-        self.updated_at = u.isoformat()
+        self.updated_at = datetime.now()
+        models.storage.new(self)
+        models.storage.save()
 
     def to_dict(self):
-        self.__dict__['__class__'] = type(self).__name__
-        return self.__dict__
+        d = self.__dict__.copy()
+        d['created_at'] = self.created_at.isoformat()
+        d['updated_at'] = self.updated_at.isoformat()
+        d['__class__'] = type(self).__name__
+        return d
 
     def __str__(self):
         return ("[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__))
