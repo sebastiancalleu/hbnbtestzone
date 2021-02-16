@@ -3,6 +3,11 @@
 import json
 from ..base_model import BaseModel
 from ..user import User
+from ..place import Place
+from ..city import City
+from ..amenity import Amenity
+from ..review import Review
+from ..state import State
 
 class FileStorage():
 

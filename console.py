@@ -4,13 +4,19 @@ import cmd
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
+from models.place import Place
+from models.city import City
+from models.review import Review
+from models.amenity import Amenity
+from models.state import State
+import models
 import shlex
 
 class HBNBCommand(cmd.Cmd):
     """ Console interpreter command."""
 
     prompt = '(hbnb) '
-    listclasses = ["BaseModel", "User"]
+    listclasses = ["BaseModel", "User", "Place", "Review", "City", "State", "Amenity"]
 
     def do_quit(self, argv):
         """Quit command to exit the program
