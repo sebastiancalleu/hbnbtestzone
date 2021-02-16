@@ -2,6 +2,7 @@
 
 import json
 from ..base_model import BaseModel
+from ..user import User
 
 class FileStorage():
 
@@ -34,7 +35,9 @@ class FileStorage():
 
             for obj_id in lsdicts.keys():
                 obj = lsdicts[obj_id]
-                a = BaseModel(**obj)
+                listkey = obj_id.split(".")
+                classname = listkey[0]
+                a = eval(classname)(**obj)
                 FileStorage.__objects[obj_id] = (a)
         except Exception:
             pass
