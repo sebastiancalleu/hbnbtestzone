@@ -5,6 +5,9 @@ import unittest
 from os import remove
 import pep8
 from models.base_model import BaseModel
+import inspect
+import models
+from datetime import datetime
 
 
 class TestBaseModel(unittest.TestCase):
