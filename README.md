@@ -20,3 +20,30 @@ Input lines are parsed into two parts. The command, and any other text on the li
 -   Update attributes of an object
 -   Destroy an object
 
+## How to start it?
+
+The first thing to do is to download the repository and clone it into your local machine.
+
+In your linux:
+
+```
+cd /home
+```
+Now clone the repository:
+```
+git clone https://github.com/sebastiancalleu/AirBnB_clone.git
+```
+Now got to the repository that was cloned
+```
+cd AirBnB_clone
+```
+Now to start the console:
+```
+./console.py
+```
+
+
+
+## How to use it?
+As you already know how can we do, with the AirBnB console lets create 
+
