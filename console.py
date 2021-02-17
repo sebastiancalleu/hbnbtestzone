@@ -12,11 +12,13 @@ from models.state import State
 import models
 import shlex
 
+
 class HBNBCommand(cmd.Cmd):
     """ Console interpreter command."""
 
     prompt = '(hbnb) '
-    listclasses = ["BaseModel", "User", "Place", "Review", "City", "State", "Amenity"]
+    listclasses = ["BaseModel", "User", "Place",
+                   "Review", "City", "State", "Amenity"]
 
     def do_quit(self, argv):
         """Quit command to exit the program
@@ -31,8 +33,21 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """An empty line + ENTER only print a new line. """
         pass
+
     def do_create(self, classtr):
-        #listclasses = ["BaseModel", "User"]
+        """
+        do_create
+        Command to create an object
+
+        Usage: create <classname>
+
+        Arguments
+            classtr = <classname> the name of the
+            class of the object we want to create.
+
+        Return
+            Object and print the id of the object.
+        """
         if classtr:
             if classtr in HBNBCommand.listclasses:
                 obj = eval(classtr)()
@@ -44,8 +59,19 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def do_show(self, str1):
+        """
+        do_show
+        Command to show a object string representation
+
+        Usage: show <classname> <object id>
+
+        Arguments
+            str1 = string that contain classname and object id.
+
+        Return
+            print the object string representation.
+        """
         if str1:
-            #list1 = ["BaseModel", "User"]
             list2 = str1.split()
             if list2[0] in HBNBCommand.listclasses:
                 if len(list2) == 2:
@@ -63,8 +89,19 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def do_destroy(self, str1):
+        """
+        do_destroy
+        Command to destroy an object
+
+        Usage: destroy <classname> <object id>
+
+        Arguments
+            str1 = string that contains the class name an object id.
+
+        Return
+            destroy the object and print nothing.
+        """
         if str1:
-            #list1 = ["BaseModel", "User"]
             list2 = str1.split()
             if list2[0] in HBNBCommand.listclasses:
                 if len(list2) == 2:
@@ -83,13 +120,26 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def do_all(self, str1):
-        #listclasses = ["BaseModel", "User"]
-        if str1 in HBNBCommand.listclasses or bool(str1) == False:
+        """
+        do_all
+        Command to print objects (all or a class objects)
+
+        Usage: all <classname>
+               all
+
+        Arguments
+            str1 = string that contains classname.
+
+        Return
+            print the objects.
+        """
+
+        if str1 in HBNBCommand.listclasses or bool(str1) is False:
             dict1 = storage.all()
             list1 = []
             for obkey in dict1.keys():
                 obj = dict1[obkey]
-                if bool(str1) == True:
+                if bool(str1) is True:
                     if str1 in obkey.split("."):
                         list1.append(str(obj))
                 else:
@@ -102,8 +152,22 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, str1):
+        """
+        do_update
+        Command to update an attribute of a object
+
+        Usage: update <classname> <object id>
+        <attribute name> <attribute value>
+
+        Arguments
+            str1 = string that contains all
+            the information to update the object.
+
+        Return
+            modifies the object and print nothing.
+        """
+
         if str1:
-            #list1 = ["BaseModel", "User"]
             lexobj = shlex.split(str1)
             list2 = []
             for tokens in lexobj:
@@ -143,4 +207,3 @@ if __name__ == '__main__':
     else:
         """ cmdloop() is the main processing loop of the interpreter """
         HBNBCommand().cmdloop()
-#este es el mejor equipo del mundo
